@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .button {
+          border: none;
+          color: white;
+          padding: 16px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+        }
+        .button1 {
+        background-color: white; 
+        color: black; 
+         border: 2px solid #4CAF50;
+        }
+        .button1:hover {
+        background-color: #4CAF50;
+        color: white;
+        }
+        body {
+          background-image: url("yel.jpg");
+          font-family: "Lucida Console", "Courier New", monospace;
+          font-size: large;
+        }
+        </style>
+    <title>Add Data</title>
+</head>
+<body>
+
+    <form  method="POST"  enctype="multipart/form-data" >
+        ชื่อสินค้า:
+        <br><input type="text" name="N" id="N" ><br>
+        ราคา:
+        <br><input type="text" name="p" id="p" ><br>
+        รายละเอียดสินค้า:
+        <br><Textarea rows="5" cols="50" id="otherreq" name="d" id="d" ></Textarea><br>
+        <input type="file" name="image" id = "image">
+        <input type="submit" name="upload" value="upload" onclick="add()">
+
+    </form>
+        <a id="disp"></a>
+
+</body>
+<script>
+    function add() {
+    var formElement = document.querySelector("form");
+    var formData = new FormData(formElement);
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            document.getElementById('disp').innerHTML = this.responseText;
+        }
+    }
+    request.open("POST", "add.php");
+    request.send(formData);
+
+}
+</script>
+<br><a href="search.html"><button class="button button1">Back to Firstpage</button><a></a>
+</html>
